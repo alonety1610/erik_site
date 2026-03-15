@@ -1,8 +1,3 @@
-/* =====================================================
-   МАСТЕРСТРОЙ — скрипты
-   ===================================================== */
-
-/* ── TELEGRAM PROXY ── */
 const TG_PROXY = 'https://script.google.com/macros/s/AKfycbwXuzfc_RRymeU5Ti6c_dZo2uLcD5anKZVPM58XqO_-o4mTjI5-KkgevVvPaT8lavvz2g/exec';
 
 async function sendToTelegram(data) {
