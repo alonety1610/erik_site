@@ -1,14 +1,21 @@
-const TG_PROXY = 'https://script.googleusercontent.com/macros/echo?user_content_key=AWDtjMUswmHiu3FXrJH-NzuA3KSq7ZAOsZyQU_fj5lDJY5kNvaMzbzntshqhVW9wI7-J4Pj8m8bmEZ6Hy_GK-jYJDlhvUt7ufgw5UtYbJeP9IZ9EnvT_EmUGNEhF4gvf0vt36tPeCmeJ-2ITcw_ceAmXYmsYhEUOupnw8BUWncYkTFzUu-TnEoBATz1hvZVW_1sE-Z3pM3sC3hre1rmJlNVu3simjIsVGw7sMsz329hSJV7k1sp-uVgjtXrYb_tCNSRZcKbbQQt4tyqC4PY9ie_uWeeeD-XbFv7pOpNppqwZ&lib=MG1r3Nopr2_vrkCUPoUIfP4bWRrUJVv3u';
+const TG_PROXY = 'https://script.google.com/macros/s/AKfycbzEItx5P5DEIWAiCvHKkwWaS8MGPsX-qv2_VaQyA52neVtJVEdLLl3dYu4dIq0AkpsOvA/exec';
 
 async function sendToTelegram(data) {
   try {
-    await fetch(TG_PROXY, {
+    const resp = await fetch(TG_PROXY, {
       method: 'POST',
       headers: { 'Content-Type': 'text/plain' },
       body: JSON.stringify(data)
     });
+
+    const body = await resp.text();
+    if (!resp.ok) {
+      throw new Error(`HTTP ${resp.status}: ${body || 'empty response'}`);
+    }
+    return { ok: true, body };
   } catch (e) {
     console.error('Telegram proxy error:', e);
+    return { ok: false, error: String(e && e.message ? e.message : e) };
   }
 }
 
@@ -104,7 +111,14 @@ async function submitModal() {
   btn.disabled = true;
   btn.textContent = 'Отправляем...';
 
-  await sendToTelegram({ name, phone, service: _modalService, comment });
+  const result = await sendToTelegram({ name, phone, service: _modalService, comment });
+
+  if (!result.ok) {
+    btn.disabled = false;
+    btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;flex-shrink:0"><use href="#ic-send"/></svg> Отправить заявку`;
+    alert('Не удалось отправить заявку. Проверьте публикацию Google Script (/exec) и попробуйте снова.');
+    return;
+  }
 
   showStep(3);
   document.getElementById('mname').value    = '';
@@ -267,7 +281,14 @@ async function submitForm() {
   btn.disabled = true;
   btn.textContent = 'Отправляем...';
 
-  await sendToTelegram({ name, phone, service, comment });
+  const result = await sendToTelegram({ name, phone, service, comment });
+
+  if (!result.ok) {
+    btn.disabled = false;
+    btn.textContent = 'Получить смету бесплатно →';
+    alert('Не удалось отправить заявку. Проверьте публикацию Google Script (/exec) и попробуйте снова.');
+    return;
+  }
 
   btn.disabled = false;
   btn.textContent = 'Получить смету бесплатно →';
