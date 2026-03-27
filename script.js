@@ -1,4 +1,4 @@
-const TG_PROXY = 'https://script.google.com/macros/s/AKfycbwXuzfc_RRymeU5Ti6c_dZo2uLcD5anKZVPM58XqO_-o4mTjI5-KkgevVvPaT8lavvz2g/exec';
+const TG_PROXY = 'https://script.googleusercontent.com/macros/echo?user_content_key=AWDtjMUswmHiu3FXrJH-NzuA3KSq7ZAOsZyQU_fj5lDJY5kNvaMzbzntshqhVW9wI7-J4Pj8m8bmEZ6Hy_GK-jYJDlhvUt7ufgw5UtYbJeP9IZ9EnvT_EmUGNEhF4gvf0vt36tPeCmeJ-2ITcw_ceAmXYmsYhEUOupnw8BUWncYkTFzUu-TnEoBATz1hvZVW_1sE-Z3pM3sC3hre1rmJlNVu3simjIsVGw7sMsz329hSJV7k1sp-uVgjtXrYb_tCNSRZcKbbQQt4tyqC4PY9ie_uWeeeD-XbFv7pOpNppqwZ&lib=MG1r3Nopr2_vrkCUPoUIfP4bWRrUJVv3u';
 
 async function sendToTelegram(data) {
   try {
