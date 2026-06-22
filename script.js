@@ -1,4 +1,4 @@
-const TG_PROXY = 'https://script.google.com/macros/s/AKfycbwJiLuKn2OF1FyxplgybrEMnOxwkaTrEwurMyn2gUlJQhi6XYXMRENETKYoyq3NKok_aw/exec';
+const TG_PROXY = 'https://script.google.com/macros/s/AKfycbz_iOdebyfDyid66ARrNIvaxf-bL7WQMAD168YozHJ8ss5LKw7OY0dm6DX9fb_FtESD/exec';
 
 async function sendToTelegram(data) {
   try {
